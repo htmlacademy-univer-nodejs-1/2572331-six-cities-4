@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Илья Лагунов](https://up.htmlacademy.ru/univer-nodejs-api/4/user/2572331).
-* Наставник: `Неизвестно`.
+* Наставник: [Олег Глущенко](https://htmlacademy.ru/profile/id305355).
 
 ---
 
