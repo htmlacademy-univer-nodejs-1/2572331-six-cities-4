@@ -1,0 +1,65 @@
+{
+  "api": {
+    "titles": [
+      "Современная квартира в центре",
+      "Просторный дом с садом"
+    ],
+    "descriptions": [
+      "Уютная и стильная квартира в самом центре города. В пешей доступности множество ресторанов, кафе и магазинов.",
+      "Отличный вариант для семейного отдыха. Просторный дом с большим садом и зоной для барбекю."
+    ],
+    "cityNames": [
+      "Paris",
+      "Cologne",
+      "Brussels",
+      "Amsterdam",
+      "Hamburg",
+      "Dusseldorf"
+    ],
+    "previewImages": [
+      "https://example.com/preview1.jpg",
+      "https://example.com/preview2.jpg"
+    ],
+    "photos": [
+      "https://example.com/photo1.jpg",
+      "https://example.com/photo2.jpg",
+      "https://example.com/photo3.jpg",
+      "https://example.com/photo4.jpg",
+      "https://example.com/photo5.jpg",
+      "https://example.com/photo6.jpg"
+    ],
+    "housingTypes": [
+      "Apartment",
+      "House",
+      "Room",
+      "Hotel"
+    ],
+    "goods": [
+      "Breakfast",
+      "AirConditioning",
+      "LaptopFriendlyWorkspace",
+      "BabySeat",
+      "Washer",
+      "Towels",
+      "Fridge"
+    ],
+    "authorNames": [
+      "Тестовый Юзер Один",
+      "Тестовый Юзер Два",
+      "Тестовый Юзер Три"
+    ],
+    "authorEmails": [
+      "test1@test.com",
+      "test2@test.com",
+      "test3@test.com"
+    ],
+    "authorAvatarPaths": [
+      "https://example.com/avatar1.jpg",
+      "https://example.com/avatar2.jpg"
+    ],
+    "userTypes": [
+      "обычный",
+      "pro"
+    ]
+  }
+}
