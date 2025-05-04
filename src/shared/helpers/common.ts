@@ -14,10 +14,21 @@ export function getRandomItem<T>(items: T[]):T {
   return items[generateRandomValue(0, items.length - 1)];
 }
 
-export function getCurrentDate(): string {
-  return new Date().toISOString();
+export function generateRandomBoolean() {
+  return generateRandomValue(0, 1) === 1;
 }
 
 export function generateRandomUUID(): string {
   return uuidv4();
+}
+
+export function generateRandomString(length = 20): string {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(generateRandomValue(0, charactersLength - 1));
+  }
+
+  return result;
 }
