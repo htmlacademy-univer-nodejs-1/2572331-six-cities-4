@@ -32,3 +32,7 @@ export function generateRandomString(length = 20): string {
 
   return result;
 }
+
+export function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : '';
+}
