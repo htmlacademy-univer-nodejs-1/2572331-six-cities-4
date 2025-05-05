@@ -38,8 +38,8 @@ export function createOffer(offerData: string): Offer {
   };
 
   const coordinates: Coordinates = {
-    latitude: Number.parseInt(latitude, 10),
-    longitude: Number.parseInt(longitude, 10)
+    latitude: +latitude,
+    longitude: +longitude
   };
 
   return {
@@ -52,7 +52,7 @@ export function createOffer(offerData: string): Offer {
     photos: photos.split(';'),
     isPremium: JSON.parse(isPremium),
     isFavorite: JSON.parse(isFavorite),
-    rating: Number.parseInt(rating, 10),
+    rating: +rating,
     housingType: HousingType[housingType as 'Apartment' | 'House' | 'Room' | 'Hotel'],
     roomsCount: Number.parseInt(roomsCount, 10),
     maxGuestsCount: Number.parseInt(maxGuestsCount, 10),

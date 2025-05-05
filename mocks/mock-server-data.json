@@ -58,8 +58,8 @@
       "https://example.com/avatar2.jpg"
     ],
     "userTypes": [
-      "обычный",
-      "pro"
+      "Common",
+      "Pro"
     ]
   }
 }
