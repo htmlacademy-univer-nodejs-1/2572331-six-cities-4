@@ -36,6 +36,7 @@
   "dependencies": {
     "chalk": "^5.4.1",
     "dayjs": "^1.11.13",
+    "dotenv": "^16.5.0",
     "got": "^14.4.7",
     "json-server": "^0.17.4",
     "pino": "^9.6.0",
