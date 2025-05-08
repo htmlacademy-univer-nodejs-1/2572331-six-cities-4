@@ -8,7 +8,7 @@ import {
   getRandomItem,
   getRandomItems
 } from '../../helpers/index.js';
-import {getCityCoordinates} from '../../helpers/city.js';
+import { getCityCoordinates } from '../../helpers/index.js';
 
 const MIN_RATING = 1;
 const MAX_RATING = 5;
