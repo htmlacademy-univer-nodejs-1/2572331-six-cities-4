@@ -27,7 +27,7 @@ export function createOffer(offerData: string): Offer {
   ] = offerData.replace('\n', '').split('\t');
 
   const author: User = {
-    fullName: authorName,
+    name: authorName,
     email: authorEmail,
     avatarPath: authorAvatarPath,
     password: authorPassword,
