@@ -1,6 +1,7 @@
 import {defaultClasses, getModelForClass, modelOptions, prop} from '@typegoose/typegoose';
 import {User, UserType} from '../../types/index.js';
 import {createSHA256} from '../../helpers/index.js';
+import {CreateUserDto} from './dto/create-user.dto.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export interface UserEntity extends defaultClasses.Base {}
@@ -24,10 +25,10 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({ required: true, minlength: 6, maxlength: 12, default: '' })
   public password: string;
 
-  @prop({ required: true, enum: UserType })
+  @prop({ required: true, enum: UserType, type: () => String })
   public userType: UserType;
 
-  constructor(userData: User) {
+  constructor(userData: CreateUserDto) {
     super();
 
     this.name = userData.name;
