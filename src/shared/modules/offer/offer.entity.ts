@@ -1,6 +1,7 @@
-import {defaultClasses, getModelForClass, modelOptions, prop, Ref} from '@typegoose/typegoose';
-import {Coordinates, Goods, HousingType} from '../../types/index.js';
-import {UserEntity} from '../user/index.js';
+import { defaultClasses, getModelForClass, modelOptions, prop, Ref } from '@typegoose/typegoose';
+import { Coordinates, Goods, HousingType } from '../../types/index.js';
+import { UserEntity } from '../user/index.js';
+import {getCityCoordinates} from '../../helpers/index.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export interface OfferEntity extends defaultClasses.Base {}
@@ -73,6 +74,14 @@ export class OfferEntity extends defaultClasses.TimeStamps {
 
   @prop({ required: true })
   public coordinates: Coordinates;
+
+  public setCoordinates() {
+    this.coordinates = getCityCoordinates(this.cityName);
+  }
+
+  public getCoordinates() {
+    return this.coordinates;
+  }
 }
 
 export const OfferModel = getModelForClass(OfferEntity);
