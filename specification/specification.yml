@@ -61,10 +61,11 @@ paths:
                 email:
                   type: string
                   format: email
-                  required: true
                 password:
                   type: string
-                  required: true
+              required:
+                - email
+                - password
         required: true
       responses:
         '200':
