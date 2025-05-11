@@ -1,8 +1,8 @@
 openapi: 3.1.0
 info:
-  title: API сервер для демо-проекта «Куплю. Продам».
+  title: API сервер для демо-проекта «Шесть городов».
   description: |-
-    * Список ресурсов и маршрутов сервера «Куплю. Продам».
+    * Список ресурсов и маршрутов сервера «Шесть городов».
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
@@ -23,6 +23,28 @@ paths:
       summary: Создание нового пользователя
       description: Регистрирует нового пользователя
 
+      requestBody:
+        description: Информация для создания нового пользователя.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createUser'
+        required: true
+
+        responses:
+          "201":
+            description: Пользователь зарегистрирован
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/user'
+
+          "400":
+            description: Неверные данные пользователя
+
+          "409":
+            description: Пользователь с таким email уже существует
+
   /users/login:
     post:
       tags:
@@ -42,3 +64,56 @@ paths:
         - users
       summary: Выход из закрытой части приложения (только если авторизация выполняется на основе сессий)
       description: Завершает пользовательский сеанс
+
+
+components:
+  schemas:
+    createUser:
+      type: object
+      required:
+        - name
+        - email
+        - password
+        - type
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 15
+          example: Ilya Lagunov
+        email:
+          type: string
+          format: email
+          example: kyultex@example.com
+        avatar:
+          type: string
+          format: binary
+          description: Изображение в формате .jpg или .png
+        password:
+          type: string
+          minLength: 6
+          maxLength: 12
+          example: 123456
+        type:
+          type: string
+          enum: [ обычный, pro ]
+          example: обычный
+
+    user:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 6329c3d6a04ab1061c6425ea
+        name:
+          type: string
+          example: Ilya Lagunov
+        email:
+          type: string
+          example: kyultex@example.com
+        avatar:
+          type: string
+          example: /static/avatar.jpg
+        type:
+          type: string
+          example: обычный
