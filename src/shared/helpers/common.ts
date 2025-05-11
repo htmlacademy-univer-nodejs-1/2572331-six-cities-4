@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 export function generateRandomValue(min:number, max: number, numAfterDigit = 0) {
   return +((Math.random() * (max - min)) + min).toFixed(numAfterDigit);
 }
@@ -18,11 +16,7 @@ export function generateRandomBoolean() {
   return generateRandomValue(0, 1) === 1;
 }
 
-export function generateRandomUUID(): string {
-  return uuidv4();
-}
-
-export function generateRandomString(length = 20): string {
+export function generateRandomString(length = 12): string {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;

@@ -2,7 +2,6 @@ import { Coordinates, Goods, HousingType, Offer, User, UserType } from '../types
 
 export function createOffer(offerData: string): Offer {
   const [
-    offerId,
     title,
     description,
     createdDate,
@@ -17,7 +16,6 @@ export function createOffer(offerData: string): Offer {
     maxGuestsCount,
     price,
     goods,
-    authorId,
     authorName,
     authorEmail,
     authorAvatarPath,
@@ -29,8 +27,7 @@ export function createOffer(offerData: string): Offer {
   ] = offerData.replace('\n', '').split('\t');
 
   const author: User = {
-    id: authorId,
-    fullName: authorName,
+    name: authorName,
     email: authorEmail,
     avatarPath: authorAvatarPath,
     password: authorPassword,
@@ -43,7 +40,6 @@ export function createOffer(offerData: string): Offer {
   };
 
   return {
-    id: offerId,
     title: title,
     description: description,
     postDate: new Date(createdDate),

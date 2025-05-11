@@ -1,14 +1,8 @@
 import dayjs from 'dayjs';
 import { OfferGenerator } from './offer-generator.interface.js';
 import { MockServerData } from '../../types/index.js';
-import {
-  generateRandomBoolean, generateRandomString,
-  generateRandomUUID,
-  generateRandomValue,
-  getRandomItem,
-  getRandomItems
-} from '../../helpers/index.js';
-import {getCityCoordinates} from '../../helpers/city.js';
+import { generateRandomBoolean, generateRandomString, generateRandomValue, getRandomItem, getRandomItems } from '../../helpers/index.js';
+import { getCityCoordinates } from '../../helpers/index.js';
 
 const MIN_RATING = 1;
 const MAX_RATING = 5;
@@ -30,7 +24,6 @@ export class TSVOfferGenerator implements OfferGenerator {
   constructor(private readonly mockData: MockServerData) {}
 
   public generate(): string {
-    const id = generateRandomUUID();
     const title = getRandomItem<string>(this.mockData.titles);
     const description = getRandomItem<string>(this.mockData.descriptions);
     const cityName = getRandomItem<string>(this.mockData.cityNames);
@@ -44,9 +37,8 @@ export class TSVOfferGenerator implements OfferGenerator {
     const maxGuestsCount = generateRandomValue(MIN_GUESTS_COUNT, MAX_GUESTS_COUNT).toString();
     const price = generateRandomValue(MIN_PRICE, MAX_PRICE).toString();
     const goods = getRandomItems<string>(this.mockData.goods).join(';');
-    const userId = generateRandomUUID();
     const authorName = getRandomItem<string>(this.mockData.authorNames);
-    const email = getRandomItem(this.mockData.authorEmails);
+    const authorEmailDomain = getRandomItem(this.mockData.emailDomains);
     const avatarPath = getRandomItem(this.mockData.authorAvatarPaths);
     const password = generateRandomString();
     const userType = getRandomItem<string>(this.mockData.userTypes);
@@ -57,14 +49,16 @@ export class TSVOfferGenerator implements OfferGenerator {
       .subtract(generateRandomValue(FIRST_WEEK_DAY, LAST_WEEK_DAY), 'day')
       .toISOString();
 
+    const authorEmail = `${generateRandomString()}@${authorEmailDomain}`;
+
     const latitude = coordinates.latitude;
     const longitude = coordinates.longitude;
 
     return [
-      id, title, description, postDate, cityName,
+      title, description, postDate, cityName,
       previewImage, photos, isPremium, isFavorite, rating,
       housingType, roomsCount, maxGuestsCount, price, goods,
-      userId, authorName, email, avatarPath, password, userType,
+      authorName, authorEmail, avatarPath, password, userType,
       commentsCount, latitude, longitude
     ].join('\t');
   }

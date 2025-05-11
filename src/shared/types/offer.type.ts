@@ -4,7 +4,6 @@ import {User} from './user.type.js';
 import {Coordinates} from './coordinates.type.js';
 
 export type Offer = {
-  id: string;
   title: string;
   description: string;
   postDate: Date;
