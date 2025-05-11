@@ -7,7 +7,7 @@ export type MockServerData = {
   housingTypes: string[];
   goods: string[];
   authorNames: string[];
-  authorEmails: string[];
+  emailDomains: string[];
   authorAvatarPaths: string[];
   userTypes: string[];
 };

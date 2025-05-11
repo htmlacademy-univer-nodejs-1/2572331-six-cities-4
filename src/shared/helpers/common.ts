@@ -16,7 +16,7 @@ export function generateRandomBoolean() {
   return generateRandomValue(0, 1) === 1;
 }
 
-export function generateRandomString(length = 20): string {
+export function generateRandomString(length = 12): string {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
