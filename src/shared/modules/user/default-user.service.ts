@@ -5,6 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto.js';
 import { inject, injectable } from 'inversify';
 import { Component } from '../../types/index.js';
 import { Logger } from '../../libs/logger/index.js';
+import {UpdateUserDto} from './dto/update-user.dto.js';
 
 @injectable()
 export class DefaultUserService implements UserService {
@@ -35,5 +36,40 @@ export class DefaultUserService implements UserService {
     }
 
     return this.create(dto, salt);
+  }
+
+  public async findById(userId: string): Promise<DocumentType<UserEntity> | null> {
+    return this.userModel.findById(userId).exec();
+  }
+
+  public async updateById(userId: string, dto: UpdateUserDto): Promise<DocumentType<UserEntity> | null> {
+    return this.userModel
+      .findByIdAndUpdate(userId, dto, {new: true})
+      .exec();
+  }
+
+  public async addToFavorites(userId: string, offerId: string): Promise<void> {
+    await this.userModel.findByIdAndUpdate(
+      userId,
+      { $addToSet: { favorites: offerId } },
+      { new: true }
+    ).exec();
+  }
+
+  public async removeFromFavorites(userId: string, offerId: string): Promise<void> {
+    await this.userModel.findByIdAndUpdate(
+      userId,
+      { $pull: { favorites: offerId } },
+      { new: true }
+    ).exec();
+  }
+
+  public async getFavorites(userId: string): Promise<string[]> {
+    const user = await this.userModel
+      .findById(userId)
+      .select('favorites')
+      .exec();
+
+    return user?.favorites.map((offerEntity) => offerEntity._id.toString()) || [];
   }
 }
