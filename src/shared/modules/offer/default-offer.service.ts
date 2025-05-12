@@ -5,6 +5,7 @@ import { Logger } from '../../libs/logger/index.js';
 import { DocumentType, types } from '@typegoose/typegoose';
 import { OfferEntity } from './offer.entity.js';
 import { CreateOfferDto } from './dto/create-offer.dto.js';
+import {UpdateOfferDto} from './dto/update-offer.dto.js';
 
 @injectable()
 export class DefaultOfferService implements OfferService {
@@ -22,6 +23,61 @@ export class DefaultOfferService implements OfferService {
   }
 
   public async findById(offerId: string): Promise<DocumentType<OfferEntity> | null> {
-    return this.offerModel.findById(offerId).exec();
+    return this.offerModel
+      .findById(offerId)
+      .exec();
+  }
+
+  public async updateById(offerId: string, dto: UpdateOfferDto): Promise<DocumentType<OfferEntity> | null> {
+    return this.offerModel
+      .findByIdAndUpdate(offerId, dto, {new: true})
+      .exec();
+  }
+
+  public async deleteById(offerId: string): Promise<DocumentType<OfferEntity> | null> {
+    return this.offerModel
+      .findByIdAndDelete(offerId)
+      .exec();
+  }
+
+  public async find(limit = 60): Promise<DocumentType<OfferEntity>[]> {
+    return this.offerModel
+      .find()
+      .sort({postDate: -1})
+      .limit(limit)
+      .exec();
+  }
+
+  public async findPremiumByCity(city: string): Promise<DocumentType<OfferEntity>[]> {
+    return this.offerModel
+      .find({cityName: city, isPremium: true})
+      .sort({postDate: -1})
+      .limit(3)
+      .exec();
+  }
+
+  public async exists(offerId: string): Promise<boolean> {
+    return (await this.offerModel.exists({_id: offerId})) !== null;
+  }
+
+  public async incCommentCount(offerId: string): Promise<DocumentType<OfferEntity> | null> {
+    return this.offerModel
+      .findByIdAndUpdate(offerId, {$inc: {commentsCount: 1}})
+      .exec();
+  }
+
+  public async findFavorites(userId: string): Promise<DocumentType<OfferEntity>[]> {
+    return this.offerModel
+      .find({ isFavorite: true, userId })
+      .exec();
+  }
+
+  public async toggleFavorite(userId: string, offerId: string): Promise<DocumentType<OfferEntity> | null> {
+    const offer = await this.offerModel.findOne({ _id: offerId, userId });
+    if (!offer) {
+      return null;
+    }
+    offer.isFavorite = !offer.isFavorite;
+    return offer.save();
   }
 }
